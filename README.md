@@ -1,5 +1,5 @@
-# hello-world
-Repository for Class
+# ITM352_S21_repo
+ITM352_S21_repo
 
 Hello!
 
