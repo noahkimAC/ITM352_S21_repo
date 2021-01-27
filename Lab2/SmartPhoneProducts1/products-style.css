@@ -1,0 +1,19 @@
+h1, h2 {
+    font-family: 'Oswald', sans;
+    color: mediumslateblue;
+    text-align: center;
+}
+body {
+    width: 800px;
+    margin: 0 auto;
+    background-image: '';
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;  
+}
+
