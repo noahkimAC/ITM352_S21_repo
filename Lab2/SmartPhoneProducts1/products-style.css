@@ -1,19 +1,26 @@
+/* Typography */
 h1, h2 {
     font-family: 'Oswald', sans;
-    color: mediumslateblue;
+    color: black;
     text-align: center;
 }
+/* General */
 body {
     width: 800px;
     margin: 0 auto;
-    background-image: '';
-    background-color: white;
+    background-image: url(Images/phone_globe.jpg);
+    background-size: 50% 50%;
+    background-color: ivory;
     background-repeat: no-repeat;
     background-position: center; 
+    border: 5px solid black;
+    display: flex;
 }
+/* block styling */
 main {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;  
 }
-
+/* Form styling */
+/* Styling the products display */
