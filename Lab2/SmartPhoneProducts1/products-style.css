@@ -2,19 +2,21 @@
 h1, h2 {
     font-family: 'Oswald', sans;
     color: black;
-    text-align: center;
 }
 /* General */
+h1 {
+    background-color: beige; 
+}
 body {
     width: 800px;
     margin: 0 auto;
+}
+main {
     background-image: url(Images/phone_globe.jpg);
-    background-size: 50% 50%;
     background-color: ivory;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center; 
-    border: 5px solid black;
-    display: flex;
 }
 /* block styling */
 main {
@@ -23,4 +25,12 @@ main {
     justify-content: space-around;  
 }
 /* Form styling */
+div {
+    border: 5px solid black;
+    display: flex;
+}
 /* Styling the products display */
+img {
+    width: 200px;
+    height: 200px;
+}
