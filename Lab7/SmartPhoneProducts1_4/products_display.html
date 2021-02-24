@@ -47,16 +47,39 @@
     <main> 
     <section class="item" id="HTC" 
         onmouseover="
+        // if(!this.className.includes('rotate')) {
             spins_span.innerHTML = ++spins;
             this.className = 'item rotate';
-            hit_spin_span.innerHTML = (hits/spins).toFixed(2);
-            over_half ||= ( (hits/spins >= 0.5) && (hits < spins) );
-            win_span.innerHTML = over_half;
+        // }
+        // -- Winning progress depends on hits/spins
+            hits_spins_ratio = hits/spins;
+        if (hits_spins_ratio > 0 && hits_spins_ratio < 0.25) {
+                progress = 'On your way!';
+                }
+        else if (hits_spins_ratio >= 0.25 && hits_spins_ratio < 0.5) {
+                    progress = 'Almost there!';
+                }
+        else if ( hits_spins_ratio >= 0.5) {
+                if( hits < spins) { 
+                progress = 'You win!';
+                }
+            }
+        else {
+                progress = 'Get going!' ;
+            }
+            hit_spin_span.innerHTML = (hits_spins_ratio).toFixed(2);
+            over_half ||= ( (hits_spins_ratio >= 0.5) && (hits < spins) );
+            win_span.innerHTML = progress;
         "onclick="
+        // if(this.className.includes('rotate')) {
             hits_span.innerHTML = ++hits;
             this.className = 'item';
+        // } else {
+        //    this.className = 'item rotate';
+        // }
             hit_spin_span.innerHTML = (hits/spins).toFixed(2);
-            over_half ||= ( (hits/spins >= 0.5) && (hits < spins) );          win_span.innerHTML = over_half;">
+            over_half ||= ( (hits/spins >= 0.5) && (hits < spins) );      
+            win_span.innerHTML = over_half;">
         <h2>HTC</h2>
         <p style="text-align: center; font: 1em Open Sans; font-size: x-large;">$40.00</p>
         <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/HTC.jpg">
@@ -64,14 +87,39 @@
     
     <section class="item" id="Apple" 
         onmouseover="
+        // if(!this.className.includes('rotate')) {
             spins_span.innerHTML = ++spins;
-            hit_spin_span.innerHTML = (hits/spins).toFixed(2);
-            win_span.innerHTML = (hits/spins >= 0.5); 
             this.className = 'item rotate';
+        // }
+        // -- Winning progress depends on hits/spins
+            hits_spins_ratio = hits/spins;
+        if (hits_spins_ratio > 0 && hits_spins_ratio < 0.25) {
+                progress = 'On your way!';
+                }
+        else if (hits_spins_ratio >= 0.25 && hits_spins_ratio < 0.5) {
+                    progress = 'Almost there!';
+                }
+        else if ( hits_spins_ratio >= 0.5) {
+                if( hits < spins) { 
+                progress = 'You win!';
+                }
+            }
+        else {
+                progress = 'Get going!' ;
+            }
+            hit_spin_span.innerHTML = (hits_spins_ratio).toFixed(2);
+            over_half ||= ( (hits_spins_ratio >= 0.5) && (hits < spins) );
+            win_span.innerHTML = progress;
         "onclick="
+        // if(this.className.includes('rotate')) {
             hits_span.innerHTML = ++hits;
-            trash_span.innerHTML = (hits/spins < 0.5);
-            this.className = 'item';">
+            this.className = 'item';
+        // } else {
+        //    this.className = 'item rotate';
+        // }
+            hit_spin_span.innerHTML = (hits/spins).toFixed(2);
+            over_half ||= ( (hits/spins >= 0.5) && (hits < spins) );      
+            win_span.innerHTML = over_half;">
         <h2>Apple</h2>
         <p style="text-align: center; font: 1em Open Sans; font-size: x-large;">$75.00</p>
         <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/iphone-3gs.jpg">
@@ -79,14 +127,39 @@
     
     <section class="item" id="Nokia" 
         onmouseover="
+        // if(!this.className.includes('rotate')) {
             spins_span.innerHTML = ++spins;
-            hit_spin_span.innerHTML=(hits/spins).toFixed(2);
-            trash_span.innerHTML=(hits/spins < 0.5); 
             this.className = 'item rotate';
+        // }
+        // -- Winning progress depends on hits/spins
+            hits_spins_ratio = hits/spins;
+        if (hits_spins_ratio > 0 && hits_spins_ratio < 0.25) {
+                progress = 'On your way!';
+                }
+        else if (hits_spins_ratio >= 0.25 && hits_spins_ratio < 0.5) {
+                    progress = 'Almost there!';
+                }
+        else if ( hits_spins_ratio >= 0.5) {
+                if( hits < spins) { 
+                progress = 'You win!';
+                }
+            }
+        else {
+                progress = 'Get going!' ;
+            }
+            hit_spin_span.innerHTML = (hits_spins_ratio).toFixed(2);
+            over_half ||= ( (hits_spins_ratio >= 0.5) && (hits < spins) );
+            win_span.innerHTML = progress;
         "onclick="
+        // if(this.className.includes('rotate')) {
             hits_span.innerHTML = ++hits;
-            trash_span.innerHTML=(hits/spins < 0.5);
-            this.className='item';">
+            this.className = 'item';
+        // } else {
+        //    this.className = 'item rotate';
+        // }
+            hit_spin_span.innerHTML = (hits/spins).toFixed(2);
+            over_half ||= ( (hits/spins >= 0.5) && (hits < spins) );      
+            win_span.innerHTML = over_half;">
         <h2>Nokia</h2>
         <p style="text-align: center; font: 1em Open Sans; font-size: x-large;">$35.00</p>
         <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/Nokia.jpg">
@@ -94,14 +167,39 @@
     
     <section class="item" id="Samsung" 
         onmouseover="
+        // if(!this.className.includes('rotate')) {
             spins_span.innerHTML = ++spins;
-            hit_spin_span.innerHTML=(hits/spins).toFixed(2);
-            trash_span.innerHTML=(hits/spins < 0.5); 
             this.className = 'item rotate';
+        // }
+        // -- Winning progress depends on hits/spins
+            hits_spins_ratio = hits/spins;
+        if (hits_spins_ratio > 0 && hits_spins_ratio < 0.25) {
+                progress = 'On your way!';
+                }
+        else if (hits_spins_ratio >= 0.25 && hits_spins_ratio < 0.5) {
+                    progress = 'Almost there!';
+                }
+        else if ( hits_spins_ratio >= 0.5) {
+                if( hits < spins) { 
+                progress = 'You win!';
+                }
+            }
+        else {
+                progress = 'Get going!' ;
+            }
+            hit_spin_span.innerHTML = (hits_spins_ratio).toFixed(2);
+            over_half ||= ( (hits_spins_ratio >= 0.5) && (hits < spins) );
+            win_span.innerHTML = progress;
         "onclick="
+        // if(this.className.includes('rotate')) {
             hits_span.innerHTML = ++hits;
-            trash_span.innerHTML=(hits/spins < 0.5);
-            this.className='item';">
+            this.className = 'item';
+        // } else {
+        //    this.className = 'item rotate';
+        // }
+            hit_spin_span.innerHTML = (hits/spins).toFixed(2);
+            over_half ||= ( (hits/spins >= 0.5) && (hits < spins) );      
+            win_span.innerHTML = over_half;">
         <h2>Samsung</h2>
         <p style="text-align: center; font: 1em Open Sans; font-size: x-large;">$45.00</p>
         <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/Samsung.jpg">
@@ -109,14 +207,39 @@
    
     <section class="item" id="Blackberry" 
         onmouseover="
+        // if(!this.className.includes('rotate')) {
             spins_span.innerHTML = ++spins;
-            hit_spin_span.innerHTML=(hits/spins).toFixed(2);
-            trash_span.innerHTML=(hits/spins < 0.5); 
             this.className = 'item rotate';
+        // }
+        // -- Winning progress depends on hits/spins
+            hits_spins_ratio = hits/spins;
+        if (hits_spins_ratio > 0 && hits_spins_ratio < 0.25) {
+                progress = 'On your way!';
+                }
+        else if (hits_spins_ratio >= 0.25 && hits_spins_ratio < 0.5) {
+                    progress = 'Almost there!';
+                }
+        else if ( hits_spins_ratio >= 0.5) {
+                if( hits < spins) { 
+                progress = 'You win!';
+                }
+            }
+        else {
+                progress = 'Get going!' ;
+            }
+            hit_spin_span.innerHTML = (hits_spins_ratio).toFixed(2);
+            over_half ||= ( (hits_spins_ratio >= 0.5) && (hits < spins) );
+            win_span.innerHTML = progress;
         "onclick="
+        // if(this.className.includes('rotate')) {
             hits_span.innerHTML = ++hits;
-            trash_span.innerHTML=(hits/spins < 0.5);
-            this.className='item';">
+            this.className = 'item';
+        // } else {
+        //    this.className = 'item rotate';
+        // }
+            hit_spin_span.innerHTML = (hits/spins).toFixed(2);
+            over_half ||= ( (hits/spins >= 0.5) && (hits < spins) );      
+            win_span.innerHTML = over_half;">
         <h2>Blackberry</h2>
         <p style="text-align: center; font: 1em Open Sans; font-size: x-large;">$10.00</p>
         <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg">
@@ -143,4 +266,3 @@
     var hits = 0;
     var spins = 0;
 </script>
-
