@@ -1,7 +1,8 @@
-<span id="firstname">Noah</span>, <span id="lastname">Kim</span>
+<span id = "firstname">Noah</span>, <span id = "lastname">Kim</span>
 <br>
-<input type="button" value="Swap" 
-    onclick="
+<input type = "button" value = "Swap" 
+    onclick = "
+    var tmp = firstname.innerHTML;
     firstname.innerHTML = lastname.innerHTML;
-    lastname.innerHTML = firstname.innerHTML;
+    lastname.innerHTML = tmp;
     ">
