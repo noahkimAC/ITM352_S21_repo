@@ -1,6 +1,6 @@
-m =1 1;
-d = 30;
-y = 2000;
+month =11;
+day = 30;
+year = 2000;
 ys = String(y);
 Number(ys[2]+ys[3]);
 ys[0];
