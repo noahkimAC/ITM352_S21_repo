@@ -1,6 +1,6 @@
-day = 24;
-month = 'Apr';
-year = 2081;
+day = 30;
+month = 'Nov';
+year = 2000;
 
 if (month == "Jan" | month == "Feb") {
     step1 = year - 1;
