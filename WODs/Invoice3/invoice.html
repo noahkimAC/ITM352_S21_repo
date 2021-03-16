@@ -31,16 +31,6 @@
      // Subtotal
      var subtotal = 0;
 
-     // Compute shipping
-     if(subtotal <= 50) {
-       shipping = 2;
-     }
-     else if(subtotal <= 100) {
-       shipping = 5;
-     }
-     else {
-       shipping = 0.05*subtotal; // 5% of subtotal
-     }
 </script>
 
 <!DOCTYPE html>
@@ -117,11 +107,22 @@
           </tr>
         `);
 
-     // Compute tax
+    // Compute tax
      var tax_rate = 0.0575;
      var tax = tax_rate*subtotal;
 
-     // Compute grand total
+    // Compute shipping
+     if(subtotal <= 50) {
+     shipping = 2;
+     }
+     else if(subtotal <= 100) {
+       shipping = 5;
+     }
+     else {
+       shipping = 0.05*subtotal; // 5% of subtotal
+     }
+
+    // Compute grand total
      var total = subtotal + tax + shipping;
 </script>
           <tr>
