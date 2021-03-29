@@ -32,7 +32,7 @@ products = [
 {
     "name" : "AirPods 2",
     "price" : 200.00,
-    "description" : "The reiterated AirPods 2 maintains the classic fit and design of its predecessor but with improvements such as longer battery life! <br> (H1 chipset)",
+    "description" : "The reiterated AirPods 2 maintains the classic fit and design of its predecessor with significant improvements to battery life! <br> (H1 chipset)",
     "image" : "AirPods2.jpeg"
 }
 ]
