@@ -1,8 +1,11 @@
-<!--Noah Kim's Invoice-->
+<!--Noah Kim's Invoice Page-->
 <!--Borrowed and modified from my Invoice4 WOD-->
 <script src="./product_data.js" type="text/javascript">
     // This file will retrieve the product information from product_data.js
 </script>
+<script src="./navbar.js" type="text/javascript">
+  // This links it to the products array in navbar.js
+</script>  
 <script>
 // Referred to lecture video from Invoice4 lecture video and Assignment1 examples 
 let params = (new URL(document.location)).searchParams; // Retrieves the data (quantity, etc.) from submitPurchase and starts the purchase process 
@@ -27,24 +30,22 @@ let params = (new URL(document.location)).searchParams; // Retrieves the data (q
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noah's Mac Shack Invoice</title>
-<!--Template borrowed from W3Schools-->
+<!--Borrowed portion of a template from W3Schools-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="./stylesheets/products-style.css" rel="stylesheet">
     <link rel="stylesheet" href="./stylesheets/navbar.css">
+    <link rel="stylesheet" href="./stylesheets/checkout.css">
 <style>
     .w3-sidebar a {font-family: "Roboto", sans-serif}
     body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
-
-<!--Navbar borrowed & modified from BrowserHistory WODs-->
-<ul>
-    <li style="float:left"><a href="./index.html">Noah's Mac Shack Home</a></li><br>
-    <li><a href="./invoice.html">Shopping Cart</a></li>
-    <li><a class="active" href="./products_display.html">Products</a></li>
-</ul>
+<script type="text/javascript">
+  // This calls my Navbar from my navbar.js file, Professor Port helped me with this
+  navbar();
+</script>   
 </head>
     <body>
       <h1>Noah's Mac Shack Invoice</h1>
@@ -113,7 +114,7 @@ let params = (new URL(document.location)).searchParams; // Retrieves the data (q
             <td width="54%"><strong>$<script>document.write(total.toFixed(2));</script></strong></td>
         </tr>
       </tbody>
-    </table>
+    </table><br>
   <div>
 <!--Revised the shipping policy from Invoice4 b/c the products I am selling are of a higher value and price range-->
 <br><b>
@@ -122,7 +123,7 @@ let params = (new URL(document.location)).searchParams; // Retrieves the data (q
       <br>Subtotals ranging from $0 - $249.99 will be $10 shipping.
       <br>Subtotals ranging from $250 - $749.99 will be $20 shipping.
       <br>Subtotals over $750 will be charged 3% of the subtotal amount.
-      <br>This is because orders over $750 have 1 or more product(s) that increase both the weight & packaging for the shipment process.<br>
+      <br>This is because orders over $750 have 1 or more product(s) that increase both the weight & packaging for the shipment process.<br><br>
       </b>
     </div>
 <!--Checkout template copied & modified from W3Schools-->

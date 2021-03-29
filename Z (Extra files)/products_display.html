@@ -1,0 +1,98 @@
+<!--Noah's Mac Shack's Product Display/ Offering Page-->
+<script src="./product_data.js" type="text/javascript">
+    // This links it to the products array in product_data.js
+</script> 
+<script>
+// Referred to Assignment1 examples and Lab 12, modified the code
+function isNonNegInt(q, return_errors = false) { // Checks to see if the inputted values are either positive, an integer, or a whole value
+    errors = []; // Assume there are no errors AT FIRST
+    if (q == '') q = 0; // Sets blank inputs to the quantity of 0 
+    if (Number(q) != q) errors.push('<font color="red">Not a number!</font>'); // Check if the string is a number value
+    else if (q < 0) errors.push('<font color="red">Negative value!</font>'); // Check if the string is non-negative
+    else if (parseInt(q) != q) errors.push('<font color="red">Not a full value!</font>'); 
+    // Check that it is an integer
+    return return_errors ? errors : (errors.length == 0);
+}
+function checkQuantityTextbox(theTextbox) { // Utilizes NonNegInt to double check quantity
+    errs = isNonNegInt(theTextbox.value, true);
+    if (errs.length == 0) errs = ['You want:']; // Adjusts to quantity that the user wants
+    if (theTextbox.value.trim() == '') errs = ['Quantity'];
+    document.getElementById(theTextbox.name + '_label').innerHTML = errs.join(", ");
+}
+window.onload = function () {
+    let params = (new URL(document.location)).searchParams; // GET the query string & check that the quantities are valid values then go to invoice.html if it is good
+    if (params.has('submitPurchase')) {
+        has_errors = false; // Assume quantities are valid from the start
+        total_qty = 0; // Check if a value was selected i.e total quantity > 0 
+    // Display each products' image, name, and price
+    for (i = 0; i < products.length; i++) {
+        if (params.has(`quantity${i}`)) {
+            a_qty = params.get(`quantity${i}`);
+            product_form[`quantity${i}`].value = a_qty;
+            total_qty += a_qty;
+    if (!isNonNegInt(a_qty)) {
+        has_errors = true; // IF there is invalid quantity/ quantities
+        checkQuantityTextbox(product_form[`quantity${i}`]); // Displays error's location
+        }
+    }
+}
+// Respond to the errors and/or redirect user to invoice.html
+    if (has_errors) {
+        alert("Please enter only valid quantities!"); // IF user selects invalid quantities
+        } else if (total_qty == 0) { // no quantity selections
+            alert("Please select some quantities!"); // IF user selects 0 quantities
+        } else { // IF user has a valid selection, good job!
+            window.location = `./invoice.html${document.location.search}`; // Redirects user to invoice.html
+            window.stop; 
+        }
+    }
+}
+</script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Noah's Mac Shack</title> <!--Name on top of the page along with a favicon on the browser tab-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@100&display=swap" rel="stylesheet">
+    <link href="./stylesheets/products-style.css" rel="stylesheet">
+</head>
+    <body>
+        <!--Creates the product display page with the product's name, image, and price along with a box to select the quantity-->
+        <form name="product_main_display" action="/process_purchase" method="POST">
+    <header>
+        <h1>Noah's Mac Shack</h1>
+    </header>
+<div>
+    <aside>
+        <div style="font-size:4rem;text-align:center;font-weight: bold;font-style: italic; color: powderblue">
+            Base models have 8 GB of RAM and 256 GB SSD! <br> We exclusively sell Apple M1 & H1 chipped products! 
+        </div>
+    </aside>
+<main>  
+    <script>
+        for(i = 0; i < products.length; i++) {
+            document.write(` 
+                <section class="item">
+                    <h2>${products[i].name}</h2>
+                    <p>$${products[i].price}</p>
+                    <img src="./images/${products[i].image}">
+                    <label id="quantity${i}_label"}">Quantity</label> 
+                    <input type="text" placeholder="0" name="quantity${i}"
+                    onkeyup="checkQuantityTextbox(this);"> 
+                </section>
+            `);
+        }
+    </script>
+</main>
+    </div>
+        <footer>
+            <h1>
+                We work hard to make your M1 & H1 experiences, A1!
+            </h1>
+                <!--Creates the purchase button labeled "Purchase Order!"-->
+                <input type="submit" value="Purchase Order!" name="submitPurchase">
+            </footer>
+        </form>
+    </body>
+</html>

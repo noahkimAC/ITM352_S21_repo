@@ -1,4 +1,4 @@
-/* Noah Kim's navbar stylesheet */
+/* Noah Kim's Navbar Stylesheet */
 /* Configuring and styling navbar, borrowed sticky & active code from Alyssa Mencel */
 ul {
     list-style-type: none;
@@ -15,15 +15,15 @@ li {
 }
 li a {
     display: block;
-    color: plum;
+    color: black;
     font-size: 18pt;
     text-align: center;
     padding: 20px 20px;
     text-decoration: none;
 }
 li a:hover:not(.active) {
-    background-color: peachpuff;
+    background-color: whitesmoke;
 }
 .active {
-    background-color: peachpuff;
+    background-color: whitesmoke;
     }

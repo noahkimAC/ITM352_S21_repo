@@ -18,7 +18,7 @@ app.use(myParser.urlencoded({ extended: true })); // Retrieve the data from body
 app.post("/process_purchase", function (request, response) {
     let POST = request.body; // Data should be in the body
 
-// Check if the quantities are NonNegInt, borrowed code from Alvin Almira (Fall 2020)but modified it
+// Check if the quantities are NonNegInt, borrowed code from Alvin Almira (Fall 2020) but modified it
 if (typeof POST['submitPurchase'] != 'undefined') {
         var hasvalidquantities = true; // Assumes that the variable is true (has valid quantities)
         var hasquantities = false
@@ -35,7 +35,7 @@ const stringified = qs.stringify(POST); // If all quantities are valid then the 
     response.redirect("./invoice.html?" + stringified); // Utilize invoice.html and inputted data
     }  
     else { 
-    response.redirect("./products_display.html" + stringified) 
+    response.redirect("./products_display.html?" + stringified) 
         }
     }
 });

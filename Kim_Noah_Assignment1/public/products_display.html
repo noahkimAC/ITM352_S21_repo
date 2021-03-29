@@ -1,7 +1,10 @@
 <!--Noah's Mac Shack's Product Display/ Offering Page-->
 <script src="./product_data.js" type="text/javascript">
     // This links it to the products array in product_data.js
-</script> 
+</script>
+<script src="./navbar.js" type="text/javascript">
+    // This links it to my navbar.js
+</script>  
 <script>
 // Referred to Assignment1 examples and Lab 12, modified the code
 function isNonNegInt(q, return_errors = false) { // Checks to see if the inputted values are either positive, an integer, or a whole value
@@ -28,11 +31,11 @@ window.onload = function () {
     for (i = 0; i < products.length; i++) {
         if (params.has(`quantity${i}`)) {
             a_qty = params.get(`quantity${i}`);
-            product_form[`quantity${i}`].value = a_qty;
+            product_display[`quantity${i}`].value = a_qty; // Put data back in textbox, make sticky
             total_qty += a_qty;
     if (!isNonNegInt(a_qty)) {
         has_errors = true; // IF there are invalid quantities
-        checkQuantityTextbox(product_form[`quantity${i}`]); // Displays error's location
+        checkQuantityTextbox(product_display[`quantity${i}`]); // Displays error's location
         }
     }
 }
@@ -41,20 +44,17 @@ window.onload = function () {
         alert("Please enter only valid quantities!"); // IF user selects invalid quantities
         } else if (total_qty == 0) { // no quantity selections
             alert("Please select some quantities!"); // IF user selects 0 quantities
-        } else { // IF user has a valid selection, good job!
-            window.location = `./invoice.html${document.location.search}`; // Redirects user to invoice.html
-            window.stop; 
-        }
+        } 
     }
 }
 </script>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Noah's Mac Shack</title> <!--Name on top of the page along with a favicon on the browser tab-->
-<!--Template borrowed from W3Schools-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noah's Mac Shack</title> <!--Name on top of the page along with a favicon on the browser tab-->
+<!--Borrowed portion of a template from W3Schools-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
@@ -64,14 +64,23 @@ window.onload = function () {
 <style>
     .w3-sidebar a {font-family: "Roboto", sans-serif}
     body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+        /* Styled & placed the background image in html so that it would cover the whole screen */
+    /* Added another Big Sur background to remain consistent with Apple's aesthetic */
+    html { 
+        background-image: url(./images/productsdisplaybg.jpg); 
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    h1 {
+        color: peachpuff;
+        padding: 10pt;
+}
 </style>
-
-<!--Navbar borrowed & modified from BrowserHistory WODs-->
-<ul>
-    <li style="float:left"><a href="./index.html">Noah's Mac Shack Home</a></li><br>
-    <li><a href="./invoice.html">Shopping Cart</a></li>
-    <li><a class="active" href="./products_display.html">Products</a></li>
-</ul>
+<script type="text/javascript">
+    // This calls my Navbar from my navbar.js file, Professor Port helped me with this
+    navbar();
+</script>   
 </head>
     <body>
         <!--Creates the product display page with the product's name, image, and price along with a box to select the quantity-->
@@ -82,7 +91,7 @@ window.onload = function () {
     </header>
 <div>
     <aside>
-        <div style="font-size:4rem;text-align:center;font-weight: bold;font-style: italic; color: powderblue">
+        <div style="font-size:3rem;text-align:center;font-weight: bold;font-style: italic; color: peachpuff">
             Base models have 8 GB of RAM and 256 GB SSD! <br> We exclusively sell Apple M1 & H1 chipped products! 
         </div>
     </aside>
@@ -92,7 +101,8 @@ window.onload = function () {
             document.write(` 
                 <section class="item">
                     <h2>${products[i].name}</h2>
-                    <p>$${products[i].price}</p>
+                    <br><br><p>$${products[i].price}</p>
+                    <p><em>${products[i].description}</em></p>
                     <img src="./images/${products[i].image}">
                     <label id="quantity${i}_label"}">Quantity</label> 
                     <input type="text" placeholder="0" name="quantity${i}"
@@ -106,7 +116,7 @@ window.onload = function () {
         <footer>
             <h1>
                 We work hard to make your M1 & H1 experiences, A1!
-            </h1>
+            </h1><br>
                 <!--Creates the purchase button labeled "Purchase Order!"-->
                 <input type="submit" value="Purchase Order!" name="submitPurchase">
             </footer>
