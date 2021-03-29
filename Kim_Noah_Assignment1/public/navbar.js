@@ -1,3 +1,4 @@
+// Noah Kim's navbar.js 
 // Navbar borrowed & modified from BrowserHistory WODs, Professor Port helped me with this
 // This consolidates my Navbar list in this .js document that I can link and then call on in my other pages
 function navbar() {
