@@ -1,0 +1,40 @@
+<script>
+    var params = (new URL(document.location)).searchParams; // Ex 3a //
+
+    function isNonNegInt(q, returnErrors = false) {
+        if (q == '') q = 0; // if the value of the text box is “blank” or ‘’, set to value to 0 //
+        var errors = []; // Assume no errors at first
+        if (Number(q) != q) errors.push('Not a number!'); // Check if string is a number value
+        if (q < 0) errors.push('Negative value!'); // Check if it is non-negative
+        if (parseInt(q) != q) errors.push('Not an integer!'); // Check that it is an integer
+
+        return returnErrors ? errors : (errors.length == 0);
+    }
+
+    window.onload = function () { // Ex 3a //
+        // check that we have quantity
+        if (params.has('quantity_textbox')) {
+            // is the quantity valid. if so, print purchase. if not, give eror.
+            if (isNonNegInt(params.get('quantity_textbox'))) {
+                document.body.innerHTML = `Thank for you for ordering ${params.get('quantity_textbox')} things!`;
+            }
+            else { // Ex. 3b
+                document.body.innerHTML = `Invalid quantity. Press the back button and try again.`;
+            }
+        }
+    }
+</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+hi
+</body>
+
+</html>

@@ -11,6 +11,8 @@ app.get('/test', function (request, response, next) { // set path location to te
     response.send('I got a request for /test');
 });
 
+app.use(express.static('./public')); // sets up response to get requests to a particular path
+
 app.listen(8080, function() {
     console.log(`listening on port 8080`) 
 }

@@ -1,0 +1,57 @@
+<script src="./product_data.js"></script>
+<script>
+    function checkQuantityTextBox(qtyTextboxObj) { 
+        var errs = isNonNegInt(qtyTextboxObj.value, true); 
+        qty_textbox_message.innerHTML = errs.join(",");
+    }
+    function isNonNegInt(q, returnErrors = false) {
+        if (q == '') q = 0; // if the value of the text box is “blank” or ‘’, set to value to 0 //
+        var errors = []; // Assume no errors at first
+        if (Number(q) != q) errors.push('Not a number!'); // Check if string is a number value
+        if (q < 0) errors.push('Negative value!'); // Check if it is non-negative
+        if (parseInt(q) != q) errors.push('Not an integer!'); // Check that it is an integer
+
+        return returnErrors ? errors : (errors.length == 0);
+    }
+    function displayPurchase() { 
+        if (isNonNegInt(quantity_textbox.value) ) {
+            document.body.innerHTML = `Thank for you for ordering ${quantity_textbox.value} things!`;
+        }
+    }
+
+    var params = (new URL(document.location)).searchParams;
+
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form name="quantity_form" action="display_purchase?username=itm352" method="POST">
+        <script>
+            for(i in products) {
+                document.write(`<h3>${products[i]["model"]} at \$${products[i]["price"]}</h3>`);
+            }
+        </script>
+        <label>quantity desired:</label>
+        <input name="quantity_textbox" type="text" onkeyup="checkQuantityTextBox();">
+        <select name="product_select">
+            <script>
+                for(i in products) {
+                    document.write(`<option value='${i}'>${products[i]["model"]}</option>`);
+                }
+            </script>
+        </select> 
+        <span id='qty_textbox_message'>Enter a quantity</span>
+        <br>
+        <input type="submit" value="Purchase"> 
+</form>
+</body>
+
+</html>
