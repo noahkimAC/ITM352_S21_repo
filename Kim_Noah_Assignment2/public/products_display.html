@@ -22,8 +22,9 @@ function checkQuantityTextbox(theTextbox) { // Utilizes NonNegInt to double chec
     if (theTextbox.value.trim() == '') errs = ['Quantity'];
     document.getElementById(theTextbox.name + '_label').innerHTML = errs.join(", ");
 }
+// NOTE: Made changes on the server so that the user is redirected to login.html after selecting quantities
 window.onload = function () {
-    let params = (new URL(document.location)).searchParams; // GET the query string & check that the quantities are valid values then go to invoice.html if it is good
+    let params = (new URL(document.location)).searchParams; // GET the query string & check that the quantities are valid values then go to login.html if it is good
     if (params.has('submitPurchase')) {
         has_errors = false; // Assume quantities are valid from the start
         total_qty = 0; // Check if a value was selected i.e total quantity > 0 
@@ -39,11 +40,12 @@ window.onload = function () {
         }
     }
 }
-// Respond to the errors and/or redirect user to invoice.html
+// Respond to the errors and/or let users move on to login.html 
     if (has_errors) {
         alert("Please enter only valid quantities!"); // IF user selects invalid quantities
         } else if (total_qty == 0) { // no quantity selections
             alert("Please select some quantities!"); // IF user selects 0 quantities
+                // Made changes on the server so that the user is redirected to login.html after selecting quantities
         } 
     }
 }

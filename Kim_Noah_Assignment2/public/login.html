@@ -3,11 +3,13 @@
 <script src="./navbar.js" type="text/javascript">
     // This links it to the products array in navbar.js
 </script>
+    <!--Code above retrieve's user's data to personalize their login-->
+<script src="./user_data.json" type="json"></script> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <script>
-        // Borrowed and modified code from Alyssa Mencel (Fall 2020)
+        // Borrowed and modified code from Lab 13 and 14 
         // Informs user if error is present in username and/or password
         let params = (new URL(document.location)).searchParams;
         window.onload = function () {
@@ -18,30 +20,35 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title> <!--Name on top of the page along with a favicon on the browser tab-->
+    <title>Mac Shack Login</title> <!--Name on top of the page along with a favicon on the browser tab-->
 <!--Borrowed portion of a template from W3Schools-->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="./stylesheets/products-style.css" rel="stylesheet">
-    <link rel="stylesheet" href="./stylesheets/navbar.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="./stylesheets/products-style.css" rel="stylesheet">
+        <link rel="stylesheet" href="./stylesheets/navbar.css">
 <style>
-    .w3-sidebar a {font-family: "Roboto", sans-serif}
-    body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
-        /* Login Page Background */
-    html { 
-        background-color: peachpuff;
-    }
+        .w3-sidebar a {font-family: "Roboto", sans-serif}
+        body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+            /* Login Page Background */
+        html { 
+            background-color: peachpuff;
+        }
 </style>
 <script type="text/javascript">
-    // This calls my Navbar from my navbar.js file, Professor Port helped me with this
-    navbar();
+        // This calls my Navbar from my navbar.js file, Professor Port helped me with this
+        navbar();
+</script> 
+<script>
+    document.write(`<h4>Thank you ${params.get('name')} for logging in!<h4>
+    `);
 </script>  
 </head>
     <body> 
+        <!--Borrowed and modified code from W3Schools template-->
         <h1>Noah's Mac Shack User Log In Page!</h1>
-            <p>To shop or purchase products, please login and register as a member!</p>
+            <p>To shop or purchase products, please login or register as a member!</p>
             <form name="login" action="process_login" method="POST">
                 <div class="container"><br>
                     <input type="text" name="username" id="username" size="40" placeholder="Enter Username" required><br> 
@@ -55,5 +62,8 @@
 <script> 
        login.action += document.location.search; // Saves query string from my products page for the invoice (Borrowed from Prof. Port)
 </script>
+    <!--Button for Members/ Users who haven't registered an existing account-->
+    <input type="button" name="newuser" value="New Members Register Here!" class="btn2"
+    onclick="window.location='./register.html' + document.location.search;">
 </body>
 </html>
