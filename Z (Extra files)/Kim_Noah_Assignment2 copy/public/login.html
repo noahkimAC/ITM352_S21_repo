@@ -1,0 +1,68 @@
+<!--Noah Kim's Login Page-->
+<!--Borrowed and modified from Lab 14, modified template from ww3schools.com-->
+<script src="./navbar.js" type="text/javascript">
+    // This links it to the products array in navbar.js
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        // Borrowed and modified code from Lab 13 and 14 (Fall 2020)
+        // Informs user if error is present in username and/or password
+        let params = (new URL(document.location)).searchParams;
+        window.onload = function () {
+            if (params.has('LogError')) {
+                alert('Invalid Username or Password');
+            }
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mac Shack Login</title> <!--Name on top of the page along with a favicon on the browser tab-->
+<!--Borrowed portion of a template from W3Schools-->
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="./stylesheets/products-style.css" rel="stylesheet">
+        <link rel="stylesheet" href="./stylesheets/navbar.css">
+        <link rel="stylesheet" href="./stylesheets/login.css">
+<style>
+        .w3-sidebar a {font-family: "Roboto", sans-serif}
+        body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+            /* Login Page Background */
+        html { 
+            background-color: peachpuff;
+        }
+</style>
+<script type="text/javascript">
+        // This calls my Navbar from my navbar.js file, Professor Port helped me with this
+        navbar();
+</script>  
+</head>
+    <body> 
+        <form action="process_login" method="post">
+            <div class="imgcontainer">
+              <img src="./images/img_avatar2.png" alt="Avatar" class="avatar">
+            </div>
+          
+            <div class="container">
+              <label for="uname"><b>Username</b></label>
+              <input type="text" placeholder="Enter Username" name="uname" required>
+          
+              <label for="psw"><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" name="psw" required>
+          
+              <button type="submit">Login</button>
+              <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+              </label>
+            </div>
+          
+            <div class="container" style="background-color:#f1f1f1">
+              <button type="button" class="cancelbtn">Cancel</button>
+              <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+          </form>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!--Noah Kim's Registration Page-->
+<!--Borrowed and modified from Lab 14, modified template from ww3schools.com-->
+<script src="./navbar.js" type="text/javascript">
+    // This links it to the products array in navbar.js
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        // Borrowed and modified code from Lab 14
+        // Informs user if error is present in username and/or password
+        let params = (new URL(document.location)).searchParams;
+        window.onload = function () {
+            if (params.has('errors')) {
+                console.log("invalid");
+                alert('Fix the following errors: \n' + params.get('errors'));
+            }
+        }    
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title> <!--Name on top of the page along with a favicon on the browser tab-->
+<!--Borrowed portion of a template from W3Schools-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="./stylesheets/products-style.css" rel="stylesheet">
+    <link rel="stylesheet" href="./stylesheets/navbar.css">
+<style>
+    .w3-sidebar a {font-family: "Roboto", sans-serif}
+    body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+        /* Registration Page Background */
+    html { 
+        background-color: peachpuff;
+    }
+</style>
+<script type="text/javascript">
+    // This calls my Navbar from my navbar.js file, Professor Port helped me with this
+    navbar();
+</script>  
+</head>
+<body>
+    <h1>Register a Mac Shack Account!</h1>
+    <p>Please register a Mac Shack account before shopping or purchasing items!</p>
+<!--Creates form for users to register an account--> 
+<!--Borrowed and modified code from Lab 14, w3schools.com, and Stack Overflow-->
+    <div id='account'>
+        <form action="process_register" method="POST">
+            <div class="container">
+              <h1>Register</h1>
+              <p>Please fill in this form to create an account.</p>
+              <hr>
+          
+              <label for="username"><b>username</b></label>
+              <input type="text" placeholder="Enter Username" name="username" id="username" required>
+          
+              <label for="psw"><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+          
+              <label for="psw-repeat"><b>Repeat Password</b></label>
+              <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+              <hr>
+          
+              <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+              <button type="submit" class="registerbtn">Register</button>
+            </div>
+          
+            <div class="container signin">
+              <p>Already have an account? <a href="#">Sign in</a>.</p>
+            </div>
+          </form>
+        <script>
+            Register.action += document.location.search; // Saves the query string from the products _display.html for my invoice.html
+        </script>
+    </div>
+    <!--Button for Returning Members/ Users who have an existing account-->
+    <input type="button" name="olduser" value="If You Have an Account Click Here!" class="btn2"
+        onclick="window.location='./login.html' + document.location.search;">
+</body>
+</html>
