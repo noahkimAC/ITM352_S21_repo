@@ -66,18 +66,18 @@ app.post('/process_register', function (req, res) {
 // Lab Example
 app.post('/process login', function (request, response, next) {
     console.log(request.body);
-    let username_entered = request.body("uname");
-    let password = request.body("psw");
+    let username_entered = request.body["uname"];
+    let password_entered = request.body["psw"];
     if(typeof user_data[username_entered] != 'undefined') {
-        if(user_data[username_entered]['password'] == password_entered);
+        if(user_data[username_entered]['password'] == password_entered) {
             response.send(`${username_entered} is logged in`);
         } else {
             response.send(`${username_entered} password wrong`);
+            }
+        } else { 
+           response.send(`${username_entered} not found`);
         }
-        // } else { 
-           // response.send(`${username_entered} not found`);
-        // }
-});
+    });
 
 // ------------------------ User Registration ------------------------ // 
 // Borrowed and modified from Lab 14 exercise & Prof. Port recorded lecture screencast
