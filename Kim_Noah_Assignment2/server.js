@@ -21,7 +21,7 @@ app.all('*', function (request, response, next) { // Links to my request POST
     next(); // Continue
 });
 
-app.use(myParser.urlencoded({ extended: true })); // Retrieve the data from body
+app.use(myParser.urlencoded({ extended: true })); // Retrieves the data from body
 
 var user_data_file = './user_data.json';
 // Borrowed and modified from Lab 14, Prof. Port's screencasts 
@@ -30,21 +30,24 @@ if(fs.existsSync(filename)) {
     // Load in the user_data file to user_data object!
     var user_data = JSON.parse(fs.readFileSync(user_data_file, 'utf-8'));
     console.log(`${user_data_file} has ${file_stats["size"]} characters`);
+    // Outputs in terminal how many characters or the size of my user data file
 } else {
     console.log(`${user_data_file} does not exist!`);
 }
 
-// ------------------------ User Registration ------------------------ // 
+// ------------------------ Processing Login ------------------------ // 
 // Borrowed and modified from Lab 14 exercise and some from Alyssa Mencel (Fall 2020)
 app.post("/process_login", function (req, res) {
     var LogError = [];
     console.log(req.query);
+    delete req.query.username&LogError;
+    delete req.query.password&LogError;
     username = req.body.username.toLowerCase(); // Usernames are formatted as lowercase
         if (typeof user_data[username] != 'undefined') { // Username and password should not be undefined
         if (user_data[username].password == req.body.password) {
             req.query.username = username; 
             console.log(user_data[req.query.username].name);
-            req.query.name = user_data[req.query.username].name
+            req.query.fullname = user_data[req.query.username].name
             res.redirect('/invoice.html?' + qs.stringify(req.query));
                 // Redirect to invoice if username and password are correct
             return; 
@@ -62,9 +65,9 @@ app.post("/process_login", function (req, res) {
             req.query.LogError=LogError.join(';');
         }
     res.redirect('./login.html?' + qs.stringify(req.query)); // If error is present, remain on the login page
-});
+    });
 
-// -------------- Creating an account through the server ------------- // 
+// -------------- Processing Registration ------------- // 
 // Borrowed and modified from Lab 14 //
 app.post("/process_register", function (req, res) {
     qstr = req.body
@@ -81,56 +84,54 @@ app.post("/process_register", function (req, res) {
         }
 // Full name character length should be between 0 and 25 
         if ((req.body.fullname.length > 25 && req.body.fullname.length <0)) {
-        errors.push('Full Name Too Long')
+            errors.push('Full Name Too Long')
         }
 // Checks the new username in lowercase across other usernames
     var userreg = req.body.username.toLowerCase(); 
         if (typeof user_data[userreg] != 'undefined') { // Gives error if username is undefined and display message 'Username taken'
-        errors.push('Username taken')
+            errors.push('Username taken')
         }
         // Requires usernames to be letters and numbers 
         if (/^[0-9a-zA-Z]+$/.test(req.body.username)) {
         }
         else {
-        errors.push('Letters And Numbers Only for Username')
+            errors.push('Letters And Numbers Only for Username')
         }
 // ------------------------ E-Mail Validation ------------------------ //
 // NOTE: The following code will also retain the query string with the order quantities if the user decides to register as a new member from the login page
 // Borrowed and modified from Lab 14 // 
     // Password must be at least 6 characters // 
-    if (req.body.password.length < 6) {
-      errors.push('Password Too Short')
-    }
-    // Checks to see that the password was entered correctly both times
-    if (req.body.password !== req.body.repeat_password) { 
-      errors.push('Password Not a Match')
-    }
+        if (req.body.password.length < 6) {
+            errors.push('Password Too Short')
+        }
+        // Checks to see that the password was entered correctly both times
+        if (req.body.password !== req.body.repeat_password) { 
+            errors.push('Password Not a Match')
+        }
 // Borrowed and modified from Lab 14 // 
-    // If no errors are present, save username 
-    if (errors.length == 0) {
-      POST = req.body
-      console.log('no errors')
-      var username = POST['username']
-      user_data[username] = {}; // Register it as user's information
-      user_data[username].name = req.body.fullname;
-      user_data[username].password= req.body.password; // POST user's password
-      user_data[username].email = req.body.email; // POST user's email
-      data = JSON.stringify(user_data);  // Make it to user's information
-      fs.writeFileSync(filename, data, "utf-8");
-      res.redirect('./invoice.html?' + qs.stringify(req.query));
-    }
+    // If no errors are present, save username
+    // This code also makes the user's fullname, username, and email sticky if there is an error so they don't to retype everything
+    req.query.fullname = req.body.fullname;
+    req.query.username = req.body.username;
+    req.query.email = req.body.email; 
+        if (errors.length == 0) {
+            console.log('no errors')
+            var username = req.body.username;
+            user_data[username] = {}; // Register it as user's information
+            user_data[username].name = req.body.fullname;
+            user_data[username].password= req.body.password; // POST user's password
+            user_data[username].email = req.body.email; // POST user's email
+            data = JSON.stringify(user_data);  // Make it to user's information
+            fs.writeFileSync(filename, data, "utf-8");
+            res.redirect('./invoice.html?' + qs.stringify(req.query));
+        }
 // Borrowed and modified from Lab 14 // 
     // If errors are present, log the user into the console, redirect to registration page
-    if (errors.length > 0) {
-        console.log(errors)
-        req.query.name = req.body.name;
-        req.query.username = req.body.username;
-        req.query.password = req.body.password;
-        req.query.repeat_password = req.body.repeat_password;
-        req.query.email = req.body.email;
+        else {
+            console.log(errors)
 // Redirect to registration page if error is present
-        req.query.errors = errors.join(';');
-        res.redirect('register.html?' + qs.stringify(req.query));
+    req.query.errors = errors.join(';');
+    res.redirect('register.html?' + qs.stringify(req.query));
     }
 });
 
@@ -149,21 +150,19 @@ qty=POST[`quantity${i}`];
     hasquantities = hasquantities || qty>0; // If value is > 0, then it is valid
     hasvalidquantities = hasvalidquantities && isNonNegInt(qty); // If quantity is both > 0 and valid
     } 
-
 // NOTE: Following code will retain query string from products_display.html page 
-// Borrowed from Alyssa Mencel (Fall 2020) & Prof. Port's screencast "Getting Started With Assignment 2"
+// Borrowed from Prof. Port's screencast "Getting Started With Assignment 2"
 const stringified = qs.stringify(POST); // If all quantities are valid then go to login.html with query string containing the order quantities
     if (hasvalidquantities && hasquantities) {
-    response.redirect("./login.html?" + stringified); 
-    // Directs user from products_display.html to login.html with the query string that has the order quantities
+        response.redirect("./login.html?" + stringified); 
+        // Directs user from products_display.html to login.html with the query string that has the order quantities
     } else { 
-    response.redirect("./products_display.html?" + stringified) 
+        response.redirect("./products_display.html?" + stringified) 
         }
     }
 });
-
 // Reusing and repeating the isNonNegInt function from products_display.html
-function isNonNegInt(q, return_errors = false) { // Checks to see if the inputted values are either positive, an integer, or a whole value
+function isNonNegInt(q, return_errors = false) { // Checks to see if inputted values are positive, an integer, or a whole value
     errors = []; // Assume there are no errors AT FIRST
     if (q == '') q = 0; // Sets blank inputs to the quantity of 0 
     if (Number(q) != q) errors.push('<font color="red">Not a number!</font>'); // Check if the string is a number value

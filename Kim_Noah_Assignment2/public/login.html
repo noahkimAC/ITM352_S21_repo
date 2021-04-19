@@ -39,10 +39,6 @@
 <script type="text/javascript">
         // This calls my Navbar from my navbar.js file, Professor Port helped me with this
         navbar();
-</script> 
-<script>
-    document.write(`<h4>Thank you ${params.get('name')} for logging in!<h4>
-    `);
 </script>  
 </head>
     <body> 
@@ -66,4 +62,7 @@
     <input type="button" name="newuser" value="New Members Register Here!" class="btn2"
     onclick="window.location='./register.html' + document.location.search;">
 </body>
+<!--Primitive logout button that returns to index.html, once user re-enters it clears the query string--> 
+    <input type="button" name="logoutuser" value="Logout" class="btn2"              position="right" onclick="window.location='./index.html' + document.location.search;">
+    <p>Please don't forget to logout after your session!</p>
 </html>

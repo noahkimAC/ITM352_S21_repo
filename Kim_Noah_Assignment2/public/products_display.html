@@ -82,7 +82,12 @@ window.onload = function () {
 <script type="text/javascript">
     // This calls my Navbar from my navbar.js file, Professor Port helped me with this
     navbar();
-</script>   
+</script>
+<br>
+<!--Primitive logout button that returns to index.html, once user re-enters it clears the query string--> 
+<input type="button" name="logoutuser" value="Logout" class="btn2"
+onclick="window.location='./index.html' + document.location.search;">
+<p style="color: blanchedalmond; font-size: larger;">Please don't forget to logout after your session!</p>    
 </head>
     <body>
         <!--Creates the product display page with the product's name, image, and price along with a box to select the quantity-->
@@ -123,5 +128,5 @@ window.onload = function () {
                 <input type="submit" value="Purchase Order!" name="submitPurchase">
             </footer>
         </form>
-    </body>
+    </body> 
 </html>

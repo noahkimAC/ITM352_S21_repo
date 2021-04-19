@@ -41,6 +41,14 @@ h2 {
   padding-top: 0.3rem;
 }
 
+h4 {
+  color: purple;
+}
+
+b {
+  font-weight: bold;
+}
+
 p {
   font-size: 1.75rem;
 }

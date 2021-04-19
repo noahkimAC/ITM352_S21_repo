@@ -1,4 +1,5 @@
 <!--Noah Kim's Invoice Page-->
+<!--Assignment 2 modifications personalizes invoice to welcome user after login-->
 <!--Borrowed and modified from my Invoice4 WOD-->
 <script src="./product_data.js" type="text/javascript">
     // This file will retrieve the product information from product_data.js
@@ -19,11 +20,16 @@ let params = (new URL(document.location)).searchParams; // Retrieves the data (q
       quantities[i] = a_qty;
     }
   }
-}
+}  
     else { // This will tell user to select a valid quantity if they go to their shopping cart without adding any items
       document.write('Please select a valid quantity to complete purchase!'); 
         }
-  console.log(quantities); // Prints out quantities
+console.log(quantities); // Prints out quantities
+  // Personalizes invoice to recognize user by name to thank them for their order
+  if (params.has('username')) {
+      var fullname = params.get('fullname');
+      var username = params.get('username');
+}
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,11 +54,15 @@ let params = (new URL(document.location)).searchParams; // Retrieves the data (q
   // This calls my Navbar from my navbar.js file, Professor Port helped me with this
   navbar();
 </script>
-<!--The code below personalizes the user's invoice by identifying their name and thanking them for their purchase--> 
 <script>
-  document.write(`<h4>Thank you ${params.get('name')} for shopping at Noah's Mac Shack!<h4>
-  Please review your order page and fill out your purchase information to complete your order!
-  `);
+  // This personalizes the user's invoice by identifying their name and thanking them for their purchase 
+    if (fullname != 'undefined' && fullname != '') {
+      document.write (`<h4> Thank you <b><i>${fullname}</i></b> for shopping at Noah's Mac Shack! <br> Please review your order page and fill out your purchase information to complete your order!<h4>
+    `)
+  } else {
+      document.write (`<h4> Thank you <b><i>${username}</i></b> for shopping at Noah's Mac Shack! <br> Please review your order page and fill out your purchase information to complete your order!<h4>
+    `)
+  }
 </script> 
 </head>
     <body>
@@ -92,7 +102,7 @@ let params = (new URL(document.location)).searchParams; // Retrieves the data (q
           shipping = 10;
           }
         else if(subtotal <= 750) {
-          shipping = 15;
+          shipping = 20;
           }
         else {
           shipping = 0.03*subtotal; // 5% of subtotal

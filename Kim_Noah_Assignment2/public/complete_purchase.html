@@ -2,7 +2,7 @@
 <!--Linked this page to my navbar.js and will call on that data in the head-->
 <script src="./navbar.js" type="text/javascript">
     // This links it to the products array in navbar.js
-  </script> 
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,4 +45,8 @@
         Thank you and welcome to the Apple ecosystem!
     </h1>
 </body>
+<!--Primitive logout button that returns to index.html, once user re-enters it clears the query string--> 
+    <input type="button" name="logoutuser" value="Logout" class="btn2"
+    onclick="window.location='./index.html' + document.location.search;">
+    <p style="color: blanchedalmond; font-size: larger;">Please don't forget to logout after your session!</p> 
 </html>

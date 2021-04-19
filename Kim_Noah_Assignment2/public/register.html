@@ -14,6 +14,9 @@
             if (params.has('errors')) {
                 console.log("invalid");
                 alert('Fix the following errors: \n' + params.get('errors'));
+                Register["fullname"].value=params.get("fullname");
+                Register["username"].value=params.get("username");
+                Register["email"].value=params.get("email");
             }
         }    
     </script>
@@ -38,7 +41,7 @@
 <script type="text/javascript">
     // This calls my Navbar from my navbar.js file, Professor Port helped me with this
     navbar();
-</script>  
+</script>
 </head>
 <body>
     <h1>Register a Mac Shack Account!</h1>
@@ -47,14 +50,12 @@
 <!--Borrowed and modified code from Lab 14, w3schools.com, and Stack Overflow-->
     <div id='account'>
         <form method="POST" action="process_register" name="Register">
-            <input type="text" name="fullname" size="40" placeholder="Enter First & Last Name"><br />
-            <input type="text" name="username" size="40" pattern=".[a-z0-9]{3,10}"      
-            required title="Minimum 4 Characters, Maximum 10 Characters, Numbers/Letters Only" placeholder="Enter Username"><br />
-                <!--Pattern above checks for characters from a-z and character quantity from 4-10-->
-                <!--The 3 in {3,10} is so at least 4 characters are needed for the username-->
-            <input type="email" name="email" size="40" placeholder="Enter Email"
-            pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$" required title="Please enter valid email."><br />
-                <!--Matches exactly characters from a-z and numbers from 0-9-->
+            <input type="text" name="fullname" size="40" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+" placeholder="Enter First & Last Name"><br />
+                <!--Pattern matches any character from lowercase a-z and uppercase A-Z-->
+            <input type="text" name="username" size="40" pattern=".[a-z0-9]{3,15}"   required title="Minimum 4 Characters, Maximum 15 Characters, Numbers/Letters Only" placeholder="Enter Username"><br />
+                <!--Pattern matches any character from lowercase a-z, uppercase A-Z, & numbers 0-9. Min. characters are 3, max. characters are 15.-->
+            <input type="email" name="email" size="40" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$" required title="Please enter valid email." placeholder="Enter Email"><br />
+                <!--Pattern requires a universal email address format (ex: xxx@xxx.xxx) so it will match any character from letters a-z and numbers 0-9-->
             <input type="password" id="password" name="password" size="40" pattern=".{6,}" required title="6 Characters Minimum" placeholder="Enter Password"><br />
                 <!--Pattern above checks for at least 6 characters-->
             <input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{6,}" required title="6 Characters Minimum" placeholder="Repeat Password"><br />
@@ -69,4 +70,8 @@
     <input type="button" name="olduser" value="Returning Users Click Here!" class="btn2"
         onclick="window.location='./login.html' + document.location.search;">
 </body>
+<!--Primitive logout button that returns to index.html, once user re-enters it clears the query string--> 
+    <input type="button" name="logoutuser" value="Logout" class="btn2"
+    onclick="window.location='./index.html' + document.location.search;">
+    <p>Please don't forget to logout after your session!</p> 
 </html>

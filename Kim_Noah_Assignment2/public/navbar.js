@@ -7,10 +7,10 @@ function navbar() {
 document.write(`
 <ul>
     <li style="float:left"><a href="./index.html">Noah's Mac Shack Home</a></li><br>
-    <li><a href="./products_display.html">Shopping Cart</a></li>
-    <li><a href="./products_display.html">Products</a></li>
-    <li><a href="./login.html">Login</a></li>
-    <li><a href="./register.html">Registration</a></li>
+    <li><a href="./products_display.html${location.search}">Shopping Cart</a></li>
+    <li><a href="./products_display.html${location.search}">Products</a></li>
+    <li><a href="./login.html${location.search}">Login</a></li>
+    <li><a href="./register.html${location.search}">Registration</a></li>
 </ul>
 `);
 }
