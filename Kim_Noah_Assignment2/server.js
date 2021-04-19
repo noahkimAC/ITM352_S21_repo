@@ -23,42 +23,41 @@ app.all('*', function (request, response, next) { // Links to my request POST
 
 app.use(myParser.urlencoded({ extended: true })); // Retrieves the data from body
 
-var user_data_file = './user_data.json';
 // Borrowed and modified from Lab 14, Prof. Port's screencasts 
 if(fs.existsSync(filename)) {
-    var file_stats = fs.statSync(filename)
+    stats = fs.statSync(filename)
     // Load in the user_data file to user_data object!
-    var user_data = JSON.parse(fs.readFileSync(user_data_file, 'utf-8'));
-    console.log(`${user_data_file} has ${file_stats["size"]} characters`);
+    console.log(filename + ' has ' + stats.size + ' characters!');
     // Outputs in terminal how many characters or the size of my user data file
+    data = fs.readFileSync(filename, 'utf-8');
+    user_data = JSON.parse(data);
 } else {
-    console.log(`${user_data_file} does not exist!`);
+    console.log(filename + ' does not exist!');
 }
 
 // ------------------------ Processing Login ------------------------ // 
 // Borrowed and modified from Lab 14 exercise and some from Alyssa Mencel (Fall 2020)
-app.post("/process_login", function (req, res) {
+app.post("/process_login", function (req, res, next) {
     var LogError = [];
     console.log(req.query);
-    delete req.query.username&LogError;
-    delete req.query.password&LogError;
     username = req.body.username.toLowerCase(); // Usernames are formatted as lowercase
         if (typeof user_data[username] != 'undefined') { // Username and password should not be undefined
         if (user_data[username].password == req.body.password) {
-            req.query.username = username; 
+            req.query.username = username;
             console.log(user_data[req.query.username].name);
-            req.query.fullname = user_data[req.query.username].name
+            req.query.fullname = user_data[req.query.username].name;
             res.redirect('/invoice.html?' + qs.stringify(req.query));
                 // Redirect to invoice if username and password are correct
             return; 
-        } else { // If password is incorrect, display 'Invalid Password' message in console
+        }  
+        else { // If password is incorrect, display 'Invalid Password' message in console
             LogError.push = ('Invalid Password');
             console.log(LogError);
             req.query.username= username;
             req.query.name= user_data[username].name;
             req.query.LogError=LogError.join(';');
-        }
-        } else { // If username is incorrect, display 'Invalid Password' message in console
+        }   
+        } else { // If username is incorrect, display 'Invalid Username' message in console
             LogError.push = ('Invalid Username');
             console.log(LogError);
             req.query.username= username;
@@ -82,13 +81,13 @@ app.post("/process_register", function (req, res) {
         if (req.body.name == "") {
             errors.push('Invalid Full Name');
         }
-// Full name character length should be between 0 and 25 
-        if ((req.body.fullname.length > 25 && req.body.fullname.length <0)) {
+// Full name character length should be between 0 and 30 
+        if ((req.body.fullname.length > 30 && req.body.fullname.length <0)) {
             errors.push('Full Name Too Long')
         }
 // Checks the new username in lowercase across other usernames
     var userreg = req.body.username.toLowerCase(); 
-        if (typeof user_data[userreg] != 'undefined') { // Gives error if username is undefined and display message 'Username taken'
+        if (typeof user_data[userreg] != 'undefined') { // Gives error if username is taken and displays message 'Username taken'
             errors.push('Username taken')
         }
         // Requires usernames to be letters and numbers 
@@ -102,7 +101,7 @@ app.post("/process_register", function (req, res) {
 // Borrowed and modified from Lab 14 // 
     // Password must be at least 6 characters // 
         if (req.body.password.length < 6) {
-            errors.push('Password Too Short')
+            errors.push('Password Minimum 6 Characters')
         }
         // Checks to see that the password was entered correctly both times
         if (req.body.password !== req.body.repeat_password) { 
@@ -119,9 +118,9 @@ app.post("/process_register", function (req, res) {
             var username = req.body.username;
             user_data[username] = {}; // Register it as user's information
             user_data[username].name = req.body.fullname;
-            user_data[username].password= req.body.password; // POST user's password
-            user_data[username].email = req.body.email; // POST user's email
-            data = JSON.stringify(user_data);  // Make it to user's information
+            user_data[username].password= req.body.password; 
+            user_data[username].email = req.body.email; 
+            data = JSON.stringify(user_data);  // Set as user's information
             fs.writeFileSync(filename, data, "utf-8");
             res.redirect('./invoice.html?' + qs.stringify(req.query));
         }

@@ -4,14 +4,11 @@ header{
     font-size: 50px;
     margin-bottom: 30px;
 } 
-mark {
-    background-color: whitesmoke;
-    color: plum;
-}
+
 body {
     text-align: center;
-    font-family: 'Montserrat', 'sans-serif';
-    color: silver;
+    font-family: 'Monserrat', 'sans-serif';
+    color: peru;
 }
 form {
     text-align: center;
@@ -22,8 +19,9 @@ input[type=text], input[type=password], input[type=email] {
     text-align: center;
     font-size: 15px;
     width: 50%;
-    padding: 12px 20px;
-    margin: 8px 0;
+    padding: 12px 80px;
+    margin: 8px 145px;
+    border: none;
     box-sizing: border-box;
 }
 /* styling the buttons */

@@ -22,23 +22,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mac Shack Login</title> <!--Name on top of the page along with a favicon on the browser tab-->
 <!--Borrowed portion of a template from W3Schools-->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="./stylesheets/products-style.css" rel="stylesheet">
-    <link rel="stylesheet" href="./stylesheets/navbar.css">
-    <link rel="stylesheet" href="./stylesheets/login.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="./stylesheets/products-style.css" rel="stylesheet">
+        <link rel="stylesheet" href="./stylesheets/navbar.css">
 <style>
-    .w3-sidebar a {font-family: "Roboto", sans-serif}
-    body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
-/* Login Page Background */
-    html { 
-        background-image: url(./images/loginbg.jpg); 
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-    }
+        .w3-sidebar a {font-family: "Roboto", sans-serif}
+        body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+            /* Login Page Background */
+        html { 
+            background-color: peachpuff;
+        }
 </style>
 <script type="text/javascript">
         // This calls my Navbar from my navbar.js file, Professor Port helped me with this
@@ -53,13 +49,17 @@
         <p>Please don't forget to logout after your session!</p>
         <form name="login" action="process_login" method="POST">
             <div class="container"><br>
-                <input type="text" name="username" id="username" size="40" placeholder="Enter Username" required><br>
+                <label for="uname"><b>Username</b></label>
+                <span id="username_msg" style="color: red;"></span> 
+                <br><input type="text" name="username" id="username" size="40" placeholder="Enter Username" required><br>
                     <!--Creates a textbox to enter username-->
-    
-                <input type="password" name="password" size="40" placeholder="Enter Password" onkeyup="" required><br>
+
+                <label for="pswd"><b>Password</b></label>
+                <span id="password_msg" style="color: red;"></span>     
+                <br><input type="password" name="password" size="40" placeholder="Enter Password" onkeyup="" required><br>
                     <!--Creates a textbox to enter password-->
 
-                <br><input type="submit" value="Login" name="login" class='btn'>
+                <input type="submit" value="Login" name="login" class='btn'>
                     <!--Creates a button to login-->
                 </div>
             </form>
@@ -71,3 +71,14 @@
     onclick="window.location='./register.html' + document.location.search;">
 </body>
 </html>
+<script>
+    let params = (new URL(document.location)).searchParams;
+    if (params.has('username_err')) {
+        username_msg.innerHTML = params.get('username_err');
+        alert(params.get('username_err'))
+    }
+    if (params.has('password_err')) {
+        password_msg.innerHTML = params.get('password_err');
+        alert(params.get('password_err'));
+    }
+</script>

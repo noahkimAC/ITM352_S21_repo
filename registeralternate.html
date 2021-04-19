@@ -30,16 +30,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="./stylesheets/products-style.css" rel="stylesheet">
     <link rel="stylesheet" href="./stylesheets/navbar.css">
-    <link rel="stylesheet" href="./stylesheets/register.css">
 <style>
     .w3-sidebar a {font-family: "Roboto", sans-serif}
     body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
-/* Registration Page Background */
-html { 
-        background-image: url(./images/registerbg.jpeg); 
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
+        /* Registration Page Background */
+    html { 
+        background-color: peachpuff;
     }
 </style>
 <script type="text/javascript">
@@ -56,20 +52,28 @@ html {
 <!--Borrowed and modified code from Lab 14, w3schools.com, and Stack Overflow-->
     <div id='account'>
         <form method="POST" action="process_register" name="Register">
-        <div class="container">
+            <label for="fullname"><b>Full Name</b></label>
+            <span id="name_msg" style="color:red";></span>
             <input type="text" id="fullname" name="fullname" size="40" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+" placeholder="Enter Full Name" required title="Please use only letters for your full name!"><br />
 
+            <label for="username"><b>Username</b></label>
+            <span id="username_msg" style="color:red";></span>
             <input type="text" id="username" name="username" size="40" pattern=".[a-z0-9]{3,10}$" placeholder="Enter Username" required title="Min: 4 Character, Max: 10 Characters, Numbers & Letters Only"><br />
                 <!--Range min. had to be configured as 3 in order for 4 to be considered the min.-->
 
+            <label for="email"><b>Email</b></label>
+            <span id="email_msg" style="color:red";></span>
             <input type="email" id="email" name="email" size="40" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{2,}$" placeholder="Enter Email" required title="Please enter a valid email using the format, xxx@xxx.com"><br />
 
+            <label for="password"><b>Password</b></label>
+            <span id="password_msg" style="color:red";></span>
             <input type="password" id="password" name="password" size="40" pattern=".{6,}" placeholder="Enter Password" required title="6 Characters Minimum"><br />
 
-            <input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{6,}" placeholder="Repeat Password" required title="Password must be the same as above!"><br />
+            <label for="repeat_password"><b>Repeat Password</b></label>
+            <span id="repeat_password_msg" style="color:red";></span>
+            <input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{6,}" placeholder="Repeat Password" required title="6 Characters Minimum"><br />
 
             <input type="submit" value="Register" class="btn">
-        </div>
         </form>
         <script>
             Register.action += document.location.search; // Saves the query string from the products _display.html for my invoice.html
@@ -79,3 +83,36 @@ html {
     <input type="button" name="olduser" value="Returning Users Click Here!" class="btn2" onclick="window.location='./login.html' + document.location.search;">
 </body>
 </html>
+<script>
+    let params = (new URL(document.location)).searchParams;
+    if (params.has('errors')) {
+        fullname.value = params.get('fullname');
+        username.value = params.get('username');
+        email.value = params.get('email');
+        var errors = params.get('errors').split(';');
+        for (error_msg of errors) {
+            if (error_msg == 'Use Only Letters for Full Name') {
+                name_msg.innerHTML = error_msg;
+            }
+            if (error_msg == 'Invalid Full Name') {
+                name_msg.innerHTML = error_msg;
+            }
+            if (error_msg == 'Full Name Too Long') {
+                name_msg.innerHTML = error_msg;
+            }
+            if (error_msg == 'Username taken') {
+                username_msg.innerHTML = error_msg;
+            }
+            if (error_msg == 'Letters And Numbers Only for Username') {
+                username_msg.innerHTML = error_msg;
+            }
+            if (error_msg == 'Password Minimum 6 Characters') {
+                password_msg.innerHTML = error_msg;
+            }
+            if (error_msg == 'Password Not a Match') {
+                password_msg.innerHTML = error_msg;
+            }
+        };
+        alert('Please fix the following error(s):\n' + errors.join('\n'));
+    }
+</script>

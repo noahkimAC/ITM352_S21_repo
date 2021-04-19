@@ -11,6 +11,7 @@ document.write(`
     <li><a href="./products_display.html${location.search}">Products</a></li>
     <li><a href="./login.html${location.search}">Login</a></li>
     <li><a href="./register.html${location.search}">Registration</a></li>
+    <li><a href="./index.html${location.search}">Logout</a></li>
 </ul>
 `);
 }
