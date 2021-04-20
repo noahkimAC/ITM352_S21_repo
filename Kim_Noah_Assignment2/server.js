@@ -16,8 +16,8 @@ var filename = 'user_data.json'; // Creates a variable with the file name user_d
 var fs = require('fs'); // Loads/ starts up fs system actions
 const{request} = require('express');
 
-app.all('*', function (request, response, next) { // Links to my request POST
-    console.log(request.method + ' to ' + request.path); // Write the request method in the console and path
+app.all('*', function (req, res, next) { // Links to my request POST
+    console.log(req.method + ' to ' + req.path); // Write the request method in the console and path
     next(); // Continue
 });
 
