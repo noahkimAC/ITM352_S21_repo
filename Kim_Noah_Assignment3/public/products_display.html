@@ -1,0 +1,129 @@
+<!--Noah's Mac Shack's Product Display/ Offering Page-->
+<script src="./product_data.js" type="text/javascript">
+    // This links it to the products array in product_data.js
+</script>
+<script src="./navbar.js" type="text/javascript">
+    // This links it to my navbar.js
+</script>  
+<script>
+// Referred to Assignment1 examples and Lab 12, modified the code
+function isNonNegInt(q, return_errors = false) { // Checks to see if the inputted values are either positive, an integer, or a whole value
+    errors = []; // Assume there are no errors AT FIRST
+    if (q == '') q = 0; // Sets blank inputs to the quantity of 0 
+    if (Number(q) != q) errors.push('<font color="red">Not a number!</font>'); // Check if the string is a number value
+    else if (q < 0) errors.push('<font color="red">Negative value!</font>'); // Check if the string is non-negative
+    else if (parseInt(q) != q) errors.push('<font color="red">Not a full value!</font>'); 
+    // Check that it is an integer
+    return return_errors ? errors : (errors.length == 0);
+}
+function checkQuantityTextbox(theTextbox) { // Utilizes NonNegInt to double check quantity
+    errs = isNonNegInt(theTextbox.value, true);
+    if (errs.length == 0) errs = ['You want:']; // Adjusts to quantity that the user wants
+    if (theTextbox.value.trim() == '') errs = ['Quantity'];
+    document.getElementById(theTextbox.name + '_label').innerHTML = errs.join(", ");
+}
+// NOTE: Made changes on the server so that the user is redirected to login.html after selecting quantities
+window.onload = function () {
+    let params = (new URL(document.location)).searchParams; // GET the query string & check that the quantities are valid values then go to login.html if it is good
+    if (params.has('submitPurchase')) {
+        has_errors = false; // Assume quantities are valid from the start
+        total_qty = 0; // Check if a value was selected i.e total quantity > 0 
+    // Display each products' image, name, and price
+    for (i = 0; i < products.length; i++) {
+        if (params.has(`quantity${i}`)) {
+            a_qty = params.get(`quantity${i}`);
+            product_display[`quantity${i}`].value = a_qty; // Put data back in textbox, make sticky
+            total_qty += a_qty;
+    if (!isNonNegInt(a_qty)) {
+        has_errors = true; // IF there are invalid quantities
+        checkQuantityTextbox(product_display[`quantity${i}`]); // Displays error's location
+        }
+    }
+}
+// Respond to the errors and/or let users move on to login.html 
+    if (has_errors) {
+        alert("Please enter only valid quantities!"); // IF user selects invalid quantities
+        } else if (total_qty == 0) { // no quantity selections
+            alert("Please select some quantities!"); // IF user selects 0 quantities
+                // Made changes on the server so that the user is redirected to login.html after selecting quantities
+        } 
+    }
+}
+</script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noah's Mac Shack</title> <!--Name on top of the page along with a favicon on the browser tab-->
+<!--Borrowed portion of a template from W3Schools-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="./stylesheets/products-style.css" rel="stylesheet">
+    <link rel="stylesheet" href="./stylesheets/navbar.css">
+<style>
+    .w3-sidebar a {font-family: "Roboto", sans-serif}
+    body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+        /* Styled & placed the background image in html so that it would cover the whole screen */
+    /* Added another Big Sur background to remain consistent with Apple's aesthetic */
+    html { 
+        background-image: url(./images/productsdisplaybg.jpg); 
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    h1 {
+        color: peachpuff;
+        padding: 10pt;
+    }
+</style>
+<script type="text/javascript">
+    // This calls my Navbar from my navbar.js file, Professor Port helped me with this
+    navbar();
+</script>
+<br>
+<p><h4>Please don't forget to logout after your session!</h4></p>   
+</head>
+    <body>
+        <!--Creates the product display page with the product's name, image, and price along with a box to select the quantity-->
+        <!--Borrowed from my Lab 12-->
+        <form name="product_display" action="/process_purchase" method="POST">
+    <header>
+        <h1>Noah's Mac Shack</h1>
+    </header>
+<div>
+    <aside>
+        <div style="font-size:2.5rem;text-align:center;font-weight: bold;font-style: italic; color: peachpuff">
+            Base models have 8 GB of RAM and 256 GB SSD! <br> All laptops come with a USB-C Charging Cable (2m) and a 61W USB-C Power Adapter! <br> The devices we sell only contain the Apple M1 or H1 chipset! 
+        </div>
+    </aside>
+<main>  
+    <script>
+        for(i = 0; i < products.length; i++) {
+            document.write(` 
+                <section class="item">
+                    <h2>${products[i].name}</h2>
+                    <br><br><p>$${products[i].price}</p>
+                    <p><em>${products[i].description}</em></p>
+                    <img src="./images/${products[i].image}">
+                    <label id="quantity${i}_label"}">Quantity</label> 
+                    <input type="text" placeholder="0" name="quantity${i}"
+                    onkeyup="checkQuantityTextbox(this);"> 
+                </section>
+            `);
+        }
+    </script>
+</main>
+    </div>
+        <footer>
+            <h1>
+                We work hard to make your M1 & H1 experiences, A1!
+            </h1><br>
+                <!--Creates the purchase button labeled "Purchase Order!"-->
+                <input type="submit" value="Purchase Order!" name="submitPurchase">
+            </footer>
+        </form>
+    </body> 
+</html>
