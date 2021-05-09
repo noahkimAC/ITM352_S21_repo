@@ -1,12 +1,11 @@
 <!--Noah Kim's Invoice Page-->
+<!--Author: Noah Kim--> 
+<!--invoice.html-->
+
 <!--Assignment 2 modifications personalizes invoice to welcome user after login-->
 <!--Borrowed and modified from my Invoice4 WOD-->
-<script src="./product_data.js" type="text/javascript">
-    // This file will retrieve the product information from product_data.js
-</script>
-<script src="./navbar.js" type="text/javascript">
-    // This links it to the products array in navbar.js
-</script> 
+<script src="./product_data.js" type="text/javascript"> // Products array in product_data.js </script>
+<script src="./navbar.js" type="text/javascript"> // This links it to my navbar.js </script> 
 <script src="./user_data.json" type="json"></script> 
 <!--Code above retrieve's user's data to personalize & thank them in their invoice--> 
 <script>
@@ -21,7 +20,7 @@ if (params.has("username") == false) {
 }
     var quantities = []; // Creates form from the quantities and puts into an array 
     if (params.has('submitPurchase')) { // Creates loop to retrive the data
-    for (i = 0; i < products.length; i++) {
+    for (i = 0; i < allProducts[product].length; i++) {
     if (params.has(`quantity${i}`)) {
       a_qty = params.get(`quantity${i}`);
       quantities[i] = a_qty;

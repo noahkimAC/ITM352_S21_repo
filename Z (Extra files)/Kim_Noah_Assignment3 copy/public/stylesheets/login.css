@@ -1,0 +1,61 @@
+/* styling the header, body and form text*/
+header{
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 30px;
+} 
+mark {
+    background-color: whitesmoke;
+    color: plum;
+}
+body {
+    text-align: center;
+    font-family: 'Montserrat', 'sans-serif';
+    color: silver;
+}
+form {
+    text-align: center;
+}
+/* used help from w3schools website, makes the input boxes centered*/ 
+input[type=text], input[type=password], input[type=email] {
+    font-family: 'Montserrat', 'sans-serif';
+    text-align: center;
+    font-size: 15px;
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+/* styling the buttons */
+.btn {
+    font-family: 'Montserrat', 'sans-serif';
+    background-color: sienna;
+    text-align: center;
+    color: white;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    width: 40%;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 17px;
+}
+.btn:hover {
+    background-color: lightsalmon;
+}
+.btn2 {
+    font-family: 'Montserrat', 'sans-serif';
+    background-color: coral;
+    text-align: center;
+    color: white;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    width: 40%;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 17px;
+    }
+.btn2:hover {
+    background-color: lightsalmon;
+}
