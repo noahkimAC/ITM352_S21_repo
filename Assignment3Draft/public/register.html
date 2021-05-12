@@ -1,0 +1,83 @@
+<!--Noah Kim's Registration Page-->
+<!--Author: Noah Kim--> 
+<!--register.html-->
+
+<!--Borrowed and modified from Lab 14, modified template from ww3schools.com-->
+<script src="./navbar.js" type="text/javascript"> // This links it to my navbar.js </script>
+<script src="./product_data.js" type="text/javascript"> // Products array in product_data.js </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        // Borrowed and modified code from Lab 14
+        // Informs user if error is present in username and/or password
+        let params = (new URL(document.location)).searchParams;
+        window.onload = function () {
+            if (params.has('errors')) {
+                console.log("invalid");
+                alert('Fix the following errors: \n' + params.get('errors'));
+                Register["fullname"].value=params.get("fullname");
+                Register["username"].value=params.get("username");
+                Register["email"].value=params.get("email");
+            }
+        }    
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title> <!--Name on top of the page along with a favicon on the browser tab-->
+<!--Borrowed portion of a template from W3Schools-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="./stylesheets/products-style.css" rel="stylesheet">
+    <link rel="stylesheet" href="./stylesheets/navbar.css">
+    <link rel="stylesheet" href="./stylesheets/register.css">
+<style>
+    .w3-sidebar a {font-family: "Roboto", sans-serif}
+    body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+/* Registration Page Background */
+html { 
+        background-image: url(./images/registerbg.jpeg); 
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+</style>
+<script type="text/javascript">
+    // This calls my Navbar from my navbar.js file, Professor Port helped me with this
+    navbar();
+</script>
+</head>
+<body>
+    <h1>Register a Mac Shack Account!</h1>
+    <p>Please register a Mac Shack account before shopping or purchasing items!</p>
+<!--Primitive logout button in navbar.js that returns to index.html, once user re-enters it clears the query string--> 
+    <p>Please don't forget to logout after your session!</p> 
+<!--Creates form for users to register an account--> 
+<!--Borrowed and modified code from Lab 14, w3schools.com, and Stack Overflow-->
+    <div id='account'>
+        <form method="POST" action="process_register" name="Register">
+        <div class="container">
+            <input type="text" id="fullname" name="fullname" size="40" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+" placeholder="Enter Full Name" required title="Please use only letters for your full name!"><br />
+
+            <input type="text" id="username" name="username" size="40" pattern=".[a-z0-9]{3,10}$" placeholder="Enter Username" required title="Min: 4 Character, Max: 10 Characters, Numbers & Letters Only"><br />
+                <!--Range min. had to be configured as 3 in order for 4 to be considered the min.-->
+
+            <input type="email" id="email" name="email" size="40" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{2,}$" placeholder="Enter Email" required title="Please enter a valid email using the format, xxx@xxx.com"><br />
+
+            <input type="password" id="password" name="password" size="40" pattern=".{6,}" placeholder="Enter Password" required title="6 Characters Minimum"><br />
+
+            <input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{6,}" placeholder="Repeat Password" required title="Password must be the same as above!"><br />
+
+            <input type="submit" value="Register" class="btn">
+        </div>
+        </form>
+        <script>
+            Register.action += document.location.search; // Saves the query string from the products _display.html for my invoice.html
+        </script>
+    </div>
+    <!--Button for Returning Members/ Users who have an existing account-->
+    <input type="button" name="olduser" value="Returning Users Click Here!" class="btn2" onclick="window.location='./login.html' + document.location.search;">
+</body>
+</html>
