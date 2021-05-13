@@ -1,14 +1,42 @@
 <!--Noah's Mac Shack's Home Page/ Index-->
 <!--Author: Noah Kim--> 
 <!--index.html-->
+
+<script>
+// Script to retrieve cookie
+// Borrowed from Nicholas Samson (who referenced it from Russell)
+  function getCookie(name = '') {
+    let cookies = document.cookie;
+    let cookiestore = {};
+
+    cookies = cookies.split(";");
+
+    if (cookies[0] == "" && cookies[0][0] == undefined) {
+      return undefined;
+    }
+
+    cookies.forEach(function (cookie) {
+      cookie = cookie.split(/=(.+)/);
+      if (cookie[0].substr(0, 1) == ' ') {
+        cookie[0] = cookie[0].substr(1);
+      }
+      cookiestore[cookie[0]] = cookie[1];
+    });
+
+    return (name !== '' ? cookiestore[name] : cookiestore);
+  }
+  var cookieToEdit = getCookie('username');
+  var x = cookieToEdit.replace('username=', '');
+  var display = x.replace('%20', ' ');
+</script>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./navbar.js" type="text/javascript"> // This links it to my navbar.js </script>
     <script src="./product_data.js" type="text/javascript"> // Products array in product_data.js </script>
+    <script src="./functions.js" type="text/javascript"> // Loads/defines JSON in functions.js </script>
     <title>Noah's Mac Shack</title>
     <!--Name on top of the page along with a favicon on the browser tab-->
     <!--Borrowed portion of a template from W3Schools-->
@@ -104,7 +132,7 @@
 </script>
 
 <body>
-    <!--Creates the product display page with the product's name, image, and price along with a box to select the quantity-->
+    <!--Creates the product display page with links ot the 4 different product pages-->
     <!--Borrowed from my Lab 12-->
     <form name="product_display" action="/process_purchase" method="POST">
         <header>
@@ -130,7 +158,7 @@
                 <p>Click the image below to enter the page!</p>
             </section>`);}
     </script>
-</main>
+    </main>
         <footer>
             <h1>
                 We work hard to make your M1 & H1 experiences, A1!

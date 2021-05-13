@@ -10,17 +10,24 @@ function navbar() {
 document.write(`
 <ul>
     <li style="float:left"><a href="./index.html">Noah's Mac Shack Home</a></li><br>
-    <li><a href="./products.html${location.search}">Shopping Cart</a></li>
+    <li><a href="./cart.html${location.search}">Shopping Cart</a></li>
         <li><div class="dropdown">
     <li><a href="./index.html${location.search}">Products</a></li>
         <div class="dropdown-content">`);
         for(let prodtype in allProducts) {
             document.write(`<a href="products.html?product_key=${prodtype}">${prodtype}s</a><br>`)
         }
+        if (getCookie("username")!= "") {
+            document.write(`
+            <li><a href="./index.html${location.search}" onclick = "setCookie('username', '', 0)">Logout ${getCookie("username")}</a></li>
+            `);
+        } else {
+            document.write(`
+            <li><a href="./login.html${location.search}">Login (Not Logged In!)</a></li>
+            `);
+        }
         document.write(`
-    <li><a href="./login.html${location.search}">Login</a></li>
     <li><a href="./register.html${location.search}">Registration</a></li>
-    <li><a href="./index.html${location.search}">Logout</a></li>
 </ul>
 `);
 }
