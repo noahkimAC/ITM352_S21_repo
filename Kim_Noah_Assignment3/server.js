@@ -86,13 +86,26 @@ app.post("/add_toCart", function (request, response) {
         response.redirect(`./products.html?${stringified}`);
     }
 });
-// ------------------------ Updating/ Retrieving Cart Data ------------------------ // 
+// -------------------- Updating/ Retrieving Cart Data -------------------- // 
     app.post('/update_cart', function (req, res, next) {
-        console.log(req.body);
-        // Replace cart in session with post
         req.session.cart = req.body;
-        res.json({"message":'Cart has been successfully updated!'});
-    });
+        console.log(req.body, req.session.cart);
+        // Replace cart in session with post
+        let haserrors = false;
+        for (let prodtype in req.body) { // For each prodtype's quantity textbox b/c it's in the page body
+            for (let i in req.body[prodtype]) {
+                qty = req.body[prodtype][i];
+                haserrors = !isNonNegInt(qty) || haserrors;
+            };
+        };
+        if (haserrors == true) {
+            res.json({"message":'Invalid quantities, cart cannot be updated!'});
+        } else {
+            res.json({"message":'Cart has been successfully updated!'})
+            req.session.cart = req.body;
+        }
+        const ref_URL = new URL(req.get('Referrer'));
+    }); 
 
     app.post('/get_cart', function (req, res, next) { // Links to my request POST
         res.json(req.session.cart); // Write the request method in the console and path
@@ -104,12 +117,11 @@ app.post("/add_toCart", function (request, response) {
         var LogError = [];
         console.log(req.query);
         var User_username = req.body.username.toLowerCase();
-        // username = req.body.username.toLowerCase(); // Usernames are formatted as lowercase
         if (typeof user_data[User_username] != 'undefined') { // Username and password should not be undefined
             if (user_data[User_username].password == req.body.password) {
                 req.query.username = User_username;
                 console.log(user_data[req.query.username].name);
-                req.query.fullname = user_data[req.query.username].name;
+                req.query.name = user_data[req.query.username].name;
                 res.cookie('username', User_username);
                 res.redirect('/cart.html?' + qs.stringify(req.query));
                 // Redirect to invoice if username and password are correct
@@ -130,14 +142,6 @@ app.post("/add_toCart", function (request, response) {
             }
         res.redirect('./login.html?' + qs.stringify(req.query)); // If error is present, remain on the login page
     });
-
-// ------------------------ Processing Log Out ------------------------ // 
-    app.get("/logout", function (req, res) {
-        response.clearCookie('username');
-        str = `<script>alert("${request.cookies['username']} is logged out"); location.href="./index.html";</script>`;
-        response.send(str);
-        request.session.destroy();
-    }); 
 
 // ------------------------ Processing Registration ------------------------ // 
 // Borrowed and modified from Lab 14 //
@@ -196,6 +200,7 @@ app.post("/add_toCart", function (request, response) {
             fs.writeFileSync(user_info_file, data, "utf-8");
             User_username = user_data[username]['name'];
             User_email = user_data[username]['email'];
+            var user_info = {"username": username, "name": user_data[username].name, "email": user_data[username].email};
             res.cookie("username", User_username).send;
             res.redirect('./cart.html?' + qs.stringify(req.query));
         }
@@ -208,6 +213,46 @@ app.post("/add_toCart", function (request, response) {
             res.redirect('register.html?' + qs.stringify(req.query));
         }
     });
+
+// ------------------------ Processing Log Out ------------------------ // 
+    app.get("/logout", function (req, res) {
+        str = `<script>alert('You have successfully logged out!'); location.href="./index.html";</script>`;
+        res.clearCookie('user_info'); // Clears var user_info (username, email)
+        res.send(str);
+        req.session.destroy(); // Destroys session
+    }); 
+
+    // ------------------------ Complete Purchase/ Email Invoice ------------------------ // 
+    app.post('/completePurchase', function (request, response) {
+        var invoice = req.body;
+        var user_info = req.cookies["user_info"];
+        email = user_info["email"];
+        var transporter = nodemailer.createTransport({
+            host: "mail.hawaii.edu",
+            port: 25,
+            secure: false, // use TLS
+            tls: {
+                // do not fail on invalid certs
+                rejectUnauthorized: false
+            }
+        });
+        var mailOptions = {
+            from: 'noahsmacshack@gmail.com',
+            to: email,
+            subject: 'Your Mac Shack Invoice',
+            html: invoice.invoicehtml
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                status_str = 'There was an error and your invoice could not be emailed :(';
+            } else {
+                status_str = `Your invoice was mailed to ${user_data[username][email]}`;
+            }
+            res.json({ "status": status_str });
+        });
+        req.session.destroy();
+    });
+
     // Reusing and repeating the isNonNegInt function from products_display.html
         function isNonNegInt(q, return_errors = false) { // Checks to see if inputted values are positive, an integer, or a whole value
             errors = []; // Assume there are no errors AT FIRST

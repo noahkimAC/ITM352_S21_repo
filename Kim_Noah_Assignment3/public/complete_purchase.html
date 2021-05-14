@@ -28,6 +28,7 @@
     navbar();
 </script>
 <script>
+    let params = (new URL(document.location)).searchParams; // Retrieves the data (quantity, etc.) from submitPurchase and starts the purchase process 
     // Personalizes invoice to recognize user by name to thank them for their order
     if (params.has('username')) {
       var fullname = params.get('fullname');
