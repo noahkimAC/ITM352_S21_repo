@@ -216,8 +216,8 @@ app.post("/add_toCart", function (request, response) {
 
 // ------------------------ Processing Log Out ------------------------ // 
     app.get("/logout", function (req, res) {
-        str = `<script>alert('You have successfully logged out!'); location.href="./index.html";</script>`;
-        res.clearCookie('user_info'); // Clears var user_info (username, email)
+        str = `<script>alert('${req.body["username"]} have successfully logged out!'); location.href="./index.html";</script>`;
+        res.clearCookie('username'); // Clears var user_info (username, email)
         res.send(str);
         req.session.destroy(); // Destroys session
     }); 

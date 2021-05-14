@@ -183,7 +183,7 @@
     -->
 <!--If user has the cookie, the button will say "Login to Complete Purchase", if user does not, the button will say "Complete Purchase"-->
         <br><script>
-          if (getCookie("user_info") != false) {
+          if (getCookie("username") != false) {
             document.write(`
             <div id="completePurchase" class="completePurchase">
               <input type="button" onclick="completePurchase();" value="Complete Purchase">

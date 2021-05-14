@@ -22,7 +22,7 @@ function updatecart(updated_cart_data) {
         body: JSON.stringify(updated_cart_data)
       });
       const content = await rawResponse.json();
-
+      location.reload();
       alert(content["message"]);
       })();
     }
