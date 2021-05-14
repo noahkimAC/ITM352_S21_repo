@@ -19,7 +19,7 @@ document.write(`
         }
         if (getCookie("username")!= "") {
             document.write(`
-            <li><a href="./logout" onclick = "setCookie('username', '', 0)">Logout ${getCookie("username")}</a></li>
+            <li><a href="./logout">Logout ${getCookie("username")}</a></li>
             `);
         } else {
             document.write(`

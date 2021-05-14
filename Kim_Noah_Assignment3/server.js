@@ -93,8 +93,8 @@ app.post("/add_toCart", function (request, response) {
         // Replace cart in session with post
         let haserrors = false;
         for (let prodtype in req.body) { // For each prodtype's quantity textbox b/c it's in the page body
-            for (let i in req.body[prodtype]) {
-                qty = req.body[prodtype][i];
+            for (let i in req.body[quantities]) {
+                qty = req.body[quantities][i];
                 haserrors = !isNonNegInt(qty) || haserrors;
             };
         };
@@ -216,7 +216,7 @@ app.post("/add_toCart", function (request, response) {
 
 // ------------------------ Processing Log Out ------------------------ // 
     app.get("/logout", function (req, res) {
-        str = `<script>alert('${req.body["username"]} have successfully logged out!'); location.href="./index.html";</script>`;
+        str = `<script>alert('${req.cookies["username"]} has successfully logged out!'); location.href="./index.html";</script>`;
         res.clearCookie('username'); // Clears var user_info (username, email)
         res.send(str);
         req.session.destroy(); // Destroys session

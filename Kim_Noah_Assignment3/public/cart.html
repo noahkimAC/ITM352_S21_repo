@@ -64,7 +64,7 @@
 
 <body>
   <h1>Noah's Mac Shack Invoice</h1>
-  <form name="cartform">
+  <form name="cartform" action="/update_cart" method="POST">
     <table border="2">
       <tbody>
         <tr>
@@ -147,16 +147,16 @@
             </strong></td>
         </tr>
       </tbody>
-    </table>
-  </form>
-  <script>
-    document.write(`<h5> To modify your shopping cart, please add/ remove items in the quantity box, then press "Update Cart"! Press "Refresh Cart" to view your updated changes!</h5>
-    `)
-  </script>
-  <input type="button" value="Update Cart" name="Update" onclick="updatecart(cart_data)">
-  <input type="button" name="refresh" value="Refresh Cart" class="btn2"
-        onclick="window.location='./cart.html' + document.location.search;">
+    </table>   
+    <script>
+        document.write(`<h5> To modify your shopping cart, please add/ remove items in the quantity box, then press "Update Cart"! Press "Refresh Cart" to view your updated changes!</h5>
+      `)
+    </script> 
+        <input type="button" value="Update Cart" name="Update" onclick="updatecart(cart_data)">
   <br><br>
+  </form>
+
+
   <div>
     <!--Revised the shipping policy from Invoice4 b/c the products I am selling are of a higher value and price range-->
   <div class="col-75">
