@@ -1,4 +1,6 @@
-/* Noah Kim's products stylesheet */
+/* Noah Kim's Products Stylesheet */
+/* Author: Noah Kim */
+/* products-style.css */
 /* Retrieved and modified from SmartPhoneProducts3 */
 
 /* General */
@@ -95,7 +97,7 @@ section {
 
 /* Makes the image stick to the bottom right of the blocks */
 .item img {
-    width: 350px;
+    width: 225px;
     height: 180px; 
     display: block;
     position: absolute;

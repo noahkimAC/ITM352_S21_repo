@@ -13,9 +13,16 @@
   // Referred to lecture video from Invoice4 lecture video and Assignment1 examples 
   let params = (new URL(document.location)).searchParams; // Retrieves the data (quantity, etc.) from submitPurchase and starts the purchase process 
 
+  // Get the shopping cart data
+  var cart_data = {};
+  loadJSON('loadcart', function (response) {
+    cart_data = JSON.parse(response);
+  });
+
 </script>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,10 +64,7 @@
 
 <body>
   <h1>Noah's Mac Shack Invoice</h1>
-<!--Put my invoice table in a div to POST just the div for the invoice-->
-  <div id="invoiceTabdiv">
   <form name="cartform" action="/update_cart" method="POST">
-    <table id="invoicetable">
     <table border="2">
       <tbody>
         <tr>
@@ -70,11 +74,6 @@
           <th style="text-align: center;" width="54%">extended price</th>
         </tr>
         <script>
-          // Get the shopping cart data
-              var cart_data = {};
-              loadJSON('loadcart', function (response) {
-                cart_data = JSON.parse(response);
-              });
           // Modified the for loop from Invoice4 to calculate extended_price & subtotal, for ex: I shortened subtotal = extended_price + subtotal; to subtotal += price
           subtotal = 0;
           for (let prodtype in cart_data) {
@@ -148,7 +147,7 @@
             </strong></td>
         </tr>
       </tbody>
-    </table></div> 
+    </table>   
     <script>
         document.write(`<h5> To modify your shopping cart, please add/ remove items in the quantity box, then press "Update Cart"! Press "Refresh Cart" to view your updated changes!</h5>
       `)
@@ -186,9 +185,9 @@
         <br><script>
           if (getCookie("username") != false) { // If user is logged in, then they can head to complete purchase
             document.write(`
-            <div id="complete_purchase" class="completePurchase">
-              <input type="button" onclick="complete_purchase();" value="Complete Purchase">
-            </div>`);
+            <div id="completePurchase" class="completePurchase">
+              <input type="button" onclick="completePurchase();" value="Complete Purchase">
+              </div>`);
           } else { // If user is not logged in, they are taken to login
             document.write(`
             <div><input type="button" onclick="location.href='./login.html';" value="Login to Complete Purchase"</div>`);

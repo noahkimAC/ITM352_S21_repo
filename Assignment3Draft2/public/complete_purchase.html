@@ -1,7 +1,10 @@
 <!--Noah Kim's Complete Purchase/ Thank You Page-->
 <!--Linked this page to my navbar.js and will call on that data in the head-->
+
+<script src="./functions.js" type="text/javascript"> // Loads/ defines JSON in functions.js </script>
 <script src="./navbar.js" type="text/javascript"> // This links it to my navbar.js </script>
 <script src="./product_data.js" type="text/javascript"> // Products array in product_data.js </script>
+<script src="./user_data.json" type="json"></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +27,14 @@
     // This calls my navbar from my navbar.js file, Professor Port helped me with this
     navbar();
 </script>
+<script>
+    let params = (new URL(document.location)).searchParams; // Retrieves the data (quantity, etc.) from submitPurchase and starts the purchase process 
+    // Personalizes invoice to recognize user by name to thank them for their order
+    if (params.has('username')) {
+      var fullname = params.get('fullname');
+      var username = params.get('username');
+    };
+</script>
 <br>
 <p><h4>Please don't forget to logout after your session!</h4></p>   
 <style>
@@ -42,8 +53,15 @@
 </style>  
 </head>
 <body>
-    <h1>
-        Thank you and welcome to the Apple ecosystem!
-    </h1>
+    <script>
+        // This personalizes the user's invoice by identifying their name and thanking them for their purchase 
+        if (fullname != 'undefined' && fullname != '') {
+          document.write(`<h4> Thank you <font color="black"><i>${fullname}</i></font> for shopping at Noah's Mac Shack! <br> Please review your order, billing information and login to complete your purchase!<h4>
+        `)
+        } else {
+          document.write(`<h4> Thank you <font color="black"><i>${username}</i></font> for shopping at Noah's Mac Shack! <br> Please review your order, billing information and login to complete your purchase!<h4>
+        `)
+        }
+      </script>
 </body>
 </html>

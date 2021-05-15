@@ -1,4 +1,6 @@
 /* Noah Kim's Navbar Stylesheet */
+/* Author: Noah Kim */
+/* navbar.css */
 /* Configuring and styling navbar, borrowed sticky & active code from Alyssa Mencel */
 ul {
     list-style-type: none;
@@ -16,7 +18,7 @@ li {
 li a {
     display: block;
     color: black;
-    font-size: 18pt;
+    font-size: 16pt;
     text-align: center;
     padding: 20px 20px;
     text-decoration: none;

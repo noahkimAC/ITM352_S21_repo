@@ -1,14 +1,15 @@
 <!--Noah's Mac Shack's Home Page/ Index-->
 <!--Author: Noah Kim--> 
 <!--index.html-->
+
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./navbar.js" type="text/javascript"> // This links it to my navbar.js </script>
     <script src="./product_data.js" type="text/javascript"> // Products array in product_data.js </script>
+    <script src="./functions.js" type="text/javascript"> // Loads/defines JSON in functions.js </script>
     <title>Noah's Mac Shack</title>
     <!--Name on top of the page along with a favicon on the browser tab-->
     <!--Borrowed portion of a template from W3Schools-->
@@ -104,9 +105,9 @@
 </script>
 
 <body>
-    <!--Creates the product display page with the product's name, image, and price along with a box to select the quantity-->
+    <!--Creates the product display page with links ot the 4 different product pages-->
     <!--Borrowed from my Lab 12-->
-    <form name="product_display" action="/add_toCart" method="POST">
+    <form name="product_display" action="/process_purchase" method="POST">
         <header>
             <h1>Noah's Mac Shack</h1>
         </header>
@@ -130,9 +131,8 @@
                 <p>Click the image below to enter the page!</p>
             </section>`);}
     </script>
-</main>
-        </div>
-<footer>
+    </main>
+        <footer>
             <h1>
                 We work hard to make your M1 & H1 experiences, A1!
             </h1><br>
@@ -141,5 +141,4 @@
         </footer>
     </form>
 </body>
-
 </html>

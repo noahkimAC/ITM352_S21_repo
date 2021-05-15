@@ -7,11 +7,15 @@
 
 // For Assignment 3, I added a drop down button for my 4 different product pages and assigned prodtype in allProducts which will let me retrieve the data for allProducts with one code in my index.html (Home Page)
 function navbar() {
+    var cart_qty;
+    loadJSON('./cart_qty', function (res) {
+        // Parsing JSON string into object
+        cart_qty = JSON.parse(res);
+    });
 document.write(`
 <ul>
     <li style="float:left"><a href="./index.html">Noah's Mac Shack Home</a></li><br>
-    <li><a href="./cart.html${location.search}">Shopping Cart</a></li>
-        <li><div class="dropdown">
+    <li><a href="./cart.html${location.search}">Shopping Cart(${cart_qty.qty})</a></li>
     <li><a href="./index.html${location.search}">Products</a></li>
         <div class="dropdown-content">`);
         for(let prodtype in allProducts) {
