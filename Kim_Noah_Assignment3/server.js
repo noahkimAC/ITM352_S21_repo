@@ -263,7 +263,7 @@ app.post('/cart_qty', function (req, res) {
                 if (error) {
                     status_str = 'There was an error and your invoice could not be emailed!';
                 } else {
-                    status_str = `Your invoice was mailed to ${req.cookies["email"]}`;
+                    status_str = `Your invoice was mailed to ${user_data[username].email}`;
                 }
                 res.json({ "status" : status_str });
             });
